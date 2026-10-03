@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+lint_report.*
+dev_output.txt
+fix_bg.js
+fix_text_colors.js

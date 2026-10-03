@@ -1,0 +1,21 @@
+{
+  "name": "eduflow-lms",
+  "version": "1.0.0",
+  "description": "Premium Learning Management System",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "setup": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [
+    "lms",
+    "education",
+    "fullstack",
+    "react",
+    "node"
+  ],
+  "author": "EduFlow",
+  "license": "ISC"
+}
