@@ -11,7 +11,7 @@ const Footer = () => {
                     <div className="md:col-span-2 space-y-8">
                         <Link to="/" className="flex items-center gap-4 group">
                             <div className="w-16 h-16 bg-surface-container-highest rounded-2xl flex items-center justify-center border border-outline-variant group-hover:border-secondary transition-all">
-                                <img src="/assets/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
+                                <img src={`${import.meta.env.BASE_URL}assets/logo.png`} alt="Logo" className="w-10 h-10 object-contain" />
                             </div>
                             <span className="text-3xl font-black text-on-surface tracking-tighter uppercase italic">
                                 USAMA <span className="text-secondary">ACADEMY</span>
@@ -30,22 +30,17 @@ const Footer = () => {
                     <div className="space-y-8">
                         <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-secondary">Hagaha</h4>
                         <nav className="flex flex-col gap-4">
-                            {['Koorsooyinka', 'Nagu Saabsan', 'Qiimaha', 'FAQs'].map((link) => (
-                                <Link key={link} to="#" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">
-                                    {link}
-                                </Link>
-                            ))}
+                            <Link to="/courses" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">Koorsooyinka</Link>
+                            <Link to="/about" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">Nagu Saabsan</Link>
+                            <Link to="/contact" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">Nala Soo Xiriir</Link>
                         </nav>
                     </div>
 
                     <div className="space-y-8">
                         <h4 className="text-[11px] font-black uppercase tracking-[0.4em] text-secondary">Qaanuunka</h4>
                         <nav className="flex flex-col gap-4">
-                            {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((link) => (
-                                <Link key={link} to="#" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">
-                                    {link}
-                                </Link>
-                            ))}
+                            <Link to="/privacy" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">Privacy Policy</Link>
+                            <Link to="/terms" className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant hover:text-on-surface transition-all w-fit">Terms of Service</Link>
                         </nav>
                     </div>
                 </div>

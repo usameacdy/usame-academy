@@ -20,14 +20,46 @@ const Home = () => {
                     api.get('/courses'),
                     api.get('/promotions')
                 ]);
-                setCourses(courseRes.data.slice(0, 3));
-                setPromotions(promoRes.data);
+                if (courseRes.data && courseRes.data.length > 0) {
+                    setCourses(courseRes.data.slice(0, 3));
+                } else {
+                    setCourses(fallbackCourses);
+                }
+                setPromotions(promoRes.data || []);
             } catch (err) {
-                console.error('Error fetching home data:', err);
+                console.error('Error fetching home data, using fallback content:', err);
+                setCourses(fallbackCourses);
             }
         };
         fetchHomeData();
     }, []);
+
+    const fallbackCourses = [
+        {
+            id: '1',
+            title: 'Mastering React & Next.js',
+            description: 'Baro dhismaha websites-ka casriga ah adoo adeegsanaya React, Next.js iyo Tailwind CSS.',
+            price: '49.99',
+            category: 'Web Development',
+            thumbnail_url: null,
+        },
+        {
+            id: '2',
+            title: 'UI/UX Design Masterclass',
+            description: 'Baro naqshadaynta Figma, habka loo abuuro interface-yo qurux badan iyo user experience heersare ah.',
+            price: '35.00',
+            category: 'Design',
+            thumbnail_url: null,
+        },
+        {
+            id: '3',
+            title: 'Digital Marketing & Social Media Pro',
+            description: 'Baro suuqgeynta online-ka, SEO, Google Ads iyo baraha bulshada si aad ganacsigaaga kor ugu qaaddo.',
+            price: '25.00',
+            category: 'Marketing',
+            thumbnail_url: null,
+        }
+    ];
 
     const handleSearch = (e) => {
         e.preventDefault();

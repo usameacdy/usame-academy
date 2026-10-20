@@ -18,7 +18,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <Link to="/" className="flex items-center gap-4">
                     <img 
-                        src="/assets/logo.png" 
+                        src={`${import.meta.env.BASE_URL}assets/logo.png`} 
                         alt="Logo" 
                         className="w-12 h-12 object-contain"
                     />

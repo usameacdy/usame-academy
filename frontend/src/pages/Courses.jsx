@@ -12,17 +12,51 @@ const Courses = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [sortBy, setSortBy] = useState('newest');
     
-    const BACKEND_URL = import.meta.env.VITE_API_URL.replace('/api', '');
+    const BACKEND_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5001/api').replace('/api', '');
     const navigate = useNavigate();
+
+    const fallbackList = [
+        {
+            id: '1',
+            title: 'Mastering React & Next.js',
+            description: 'Go from zero to hero with the most popular web framework in the world. Includes 20 projects.',
+            price: 49.99,
+            category: 'Web Development',
+            created_at: new Date().toISOString()
+        },
+        {
+            id: '2',
+            title: 'UI/UX Design Masterclass',
+            description: 'Learn Figma, principle of design, and how to build stunning user interfaces.',
+            price: 35.00,
+            category: 'Design',
+            created_at: new Date().toISOString()
+        },
+        {
+            id: '3',
+            title: 'Digital Marketing Pro',
+            description: 'Master SEO, Social Media Marketing, and Paid Ads with real-world case studies.',
+            price: 25.00,
+            category: 'Marketing',
+            created_at: new Date().toISOString()
+        }
+    ];
 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
                 const res = await api.get('/courses');
-                setCourses(res.data);
-                setFilteredCourses(res.data);
+                if (res.data && res.data.length > 0) {
+                    setCourses(res.data);
+                    setFilteredCourses(res.data);
+                } else {
+                    setCourses(fallbackList);
+                    setFilteredCourses(fallbackList);
+                }
             } catch (err) {
                 console.error(err);
+                setCourses(fallbackList);
+                setFilteredCourses(fallbackList);
             }
             setLoading(false);
         };

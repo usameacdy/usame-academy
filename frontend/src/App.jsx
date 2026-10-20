@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -22,6 +22,8 @@ import PayRent from './pages/PayRent';
 import Footer from './components/Footer';
 import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 const LayoutWrapper = ({ children }) => {
   const location = useLocation();
@@ -110,6 +112,8 @@ function App() {
             } />
 
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

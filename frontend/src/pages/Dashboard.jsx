@@ -153,7 +153,7 @@ const Dashboard = () => {
             <aside className="hidden md:flex w-72 bg-surface border-r border-outline-variant flex-col p-6 sticky top-0 h-screen z-20">
                 <div className="flex items-center gap-4 mb-12 px-2">
                     <img 
-                        src="/assets/logo.png" 
+                        src={`${import.meta.env.BASE_URL}assets/logo.png`} 
                         alt="Logo" 
                         className="w-12 h-12 object-contain"
                     />
@@ -224,7 +224,7 @@ const Dashboard = () => {
                     {/* MOBILE HEADER */}
                     <header className="px-6 pt-8 flex justify-between items-center bg-surface/50 backdrop-blur-sm sticky top-0 z-30 pb-4">
                         <div className="flex items-center gap-3">
-                            <img src="/assets/logo.png" className="w-10 h-10 object-contain" alt="Logo" />
+                            <img src={`${import.meta.env.BASE_URL}assets/logo.png`} className="w-10 h-10 object-contain" alt="Logo" />
                             <span className="font-extrabold text-secondary text-lg tracking-tighter uppercase italic">Usama Academy</span>
                         </div>
                         <div className="flex items-center gap-3">

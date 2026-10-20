@@ -42,7 +42,7 @@ const Login = () => {
                 {/* LOGO AREA */}
                 <div className="text-center mb-10 space-y-4">
                     <img 
-                        src="/assets/logo.png" 
+                        src={`${import.meta.env.BASE_URL}assets/logo.png`} 
                         alt="Logo" 
                         className="w-24 h-24 mx-auto object-contain mb-2"
                     />

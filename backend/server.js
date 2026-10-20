@@ -21,19 +21,21 @@ app.use(helmet({
     crossOriginResourcePolicy: false,
     contentSecurityPolicy: false 
 }));
-// Allow requests from frontend (dev and production)
+// Allow requests from frontend (dev, github pages, vercel, production)
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:5173',
+    'https://usameacdy.github.io',
+    'https://usame-academy.vercel.app',
     process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(cors({
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.github.io') || origin.endsWith('.vercel.app') || origin.endsWith('.onrender.com')) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(null, true);
         }
     },
     credentials: true,

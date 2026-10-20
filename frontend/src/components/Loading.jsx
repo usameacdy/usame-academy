@@ -24,7 +24,7 @@ const Loading = () => {
                 
                 {/* Logo and Text */}
                 <div className="absolute top-28 left-1/2 -translate-x-1/2 whitespace-nowrap text-center space-y-3">
-                    <img src="/assets/logo.png" className="w-12 h-12 mx-auto animate-bounce opacity-80" alt="Logo" />
+                    <img src={`${import.meta.env.BASE_URL}assets/logo.png`} className="w-12 h-12 mx-auto animate-bounce opacity-80" alt="Logo" />
                     <h3 className="font-manrope font-black italic text-primary uppercase tracking-[0.4em] text-sm drop-shadow-sm">Usama Academy</h3>
                     <p className="font-manrope text-[10px] text-slate-400 font-black uppercase tracking-widest">Waa la soo kicinayaa...</p>
                 </div>
