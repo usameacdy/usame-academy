@@ -17,7 +17,7 @@ const Register = () => {
         setError('');
         
         const nameParts = formData.name.trim().split(/\s+/);
-        if (nameParts.length < 3) {
+        if (nameParts.length < 1) {
             setError('Fadlan qor magacaaga oo saddexan (Tusaale: Maxamed Cali Jaamac) si shahaadadaadu u dhab noqoto.');
             setLoading(false);
             return;

@@ -11,8 +11,8 @@ const generateToken = (id, role) => {
 exports.registerUser = async (req, res) => {
     const { name, email, password, role, phone } = req.body;
 
-    if (!name || name.trim().split(/\s+/).length < 3) {
-        return res.status(400).json({ message: 'Fadlan qor magacaaga oo saddexan (Saddex magac) si shahaadadaadu u noqoto mid sax ah.' });
+    if (!name || name.trim().length < 2) {
+        return res.status(400).json({ message: 'Fadlan qor magacaaga oo buuxa.' });
     }
 
     try {

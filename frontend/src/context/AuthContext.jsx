@@ -3,7 +3,7 @@ import api from '../api/axios';
 
 const AuthContext = createContext();
 
-// Verified fallback credentials matching the Neon PostgreSQL database
+// Verified credentials matching the database
 const DEMO_ACCOUNTS = {
     'admin@usamacademy.com': {
         password: 'Admin@2026',
@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('user', JSON.stringify(res.data));
             }
         } catch (err) {
-            // Only invalidate if the server explicitly returns 401 Unauthorized
             if (err.response && err.response.status === 401) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
@@ -101,7 +100,7 @@ export const AuthProvider = ({ children }) => {
         } catch (apiErr) {
             console.warn('Backend API login unavailable or rejected, checking credentials:', apiErr.message);
 
-            // Check demo credentials
+            // 2. Check demo credentials
             const demo = DEMO_ACCOUNTS[cleanEmail];
             if (demo && demo.password === cleanPass) {
                 localStorage.setItem('token', demo.user.token);
@@ -110,14 +109,27 @@ export const AuthProvider = ({ children }) => {
                 return demo.user;
             }
 
+            // 3. Check registered users in local storage
+            try {
+                const registeredUsers = JSON.parse(localStorage.getItem('registered_users') || '{}');
+                const local = registeredUsers[cleanEmail];
+                if (local && local.password === cleanPass) {
+                    localStorage.setItem('token', local.user.token);
+                    localStorage.setItem('user', JSON.stringify(local.user));
+                    setUser(local.user);
+                    return local.user;
+                }
+            } catch {}
+
             const message = apiErr.response?.data?.message || 'Email-ka ama lambarka sirta ah waa qalad. Fadlan hubi xogtaada.';
             throw new Error(message);
         }
     };
 
     const register = async (userData) => {
+        const cleanEmail = (userData.email || '').trim().toLowerCase();
         try {
-            const res = await api.post('/auth/register', userData);
+            const res = await api.post('/auth/register', { ...userData, email: cleanEmail });
             if (res.data && res.data.token) {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('user', JSON.stringify(res.data));
@@ -126,14 +138,28 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (apiErr) {
             console.warn('Backend API register unavailable, registering user locally:', apiErr.message);
+            if (apiErr.response?.data?.message) {
+                throw new Error(apiErr.response.data.message);
+            }
             const newUser = {
                 id: 'user-' + Date.now(),
                 name: userData.name || 'Arday Cusub',
-                email: (userData.email || '').trim().toLowerCase(),
+                email: cleanEmail,
                 role: userData.role || 'student',
                 phone: userData.phone || '',
                 token: 'demo-token-' + Date.now()
             };
+
+            // Save to registered_users store so they can log back in
+            try {
+                const registeredUsers = JSON.parse(localStorage.getItem('registered_users') || '{}');
+                registeredUsers[cleanEmail] = {
+                    password: userData.password,
+                    user: newUser
+                };
+                localStorage.setItem('registered_users', JSON.stringify(registeredUsers));
+            } catch {}
+
             localStorage.setItem('token', newUser.token);
             localStorage.setItem('user', JSON.stringify(newUser));
             setUser(newUser);
