@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, LogIn, ArrowRight, Eye, EyeOff, Shield, Activity, Fingerprint } from 'lucide-react';
+import { Mail, Lock, LogIn, ArrowRight, Shield, Sparkles, Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -14,32 +14,39 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         setLoading(true);
         setError('');
+
         try {
             await login(email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Ma loo ogolaan galitaanka. Hubi xogtaada.');
+            setError(err.response?.data?.message || err.message || 'Ma loo ogolaan galitaanka. Hubi xogtaada.');
         } finally {
             setLoading(false);
         }
     };
 
+    const handleQuickLogin = (quickEmail, quickPass) => {
+        setEmail(quickEmail);
+        setPassword(quickPass);
+        setError('');
+    };
+
     return (
-        <div className="min-h-screen bg-surface font-manrope text-on-surface flex flex-col items-center justify-center p-6 sm:p-12 relative overflow-hidden selection:bg-secondary/30 selection:text-secondary">
+        <div className="min-h-screen bg-surface font-manrope text-on-surface flex flex-col items-center justify-center p-6 relative overflow-hidden selection:bg-secondary/30 selection:text-secondary">
             
-            {/* STYLIZED BACKGROUND ELEMENTS */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -mr-64 -mt-64" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl -ml-32 -mb-32" />
+            {/* AMBIENT BACKGROUND GLOWS */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -mr-40 -mt-40" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl -ml-40 -mb-40" />
 
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="w-full max-w-[450px] relative z-10"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="w-full max-w-md relative z-10"
             >
-                {/* LOGO AREA */}
+                {/* BRAND HEADER */}
                 <div className="text-center mb-10 space-y-4">
                     <img 
                         src={`${import.meta.env.BASE_URL}assets/logo.png`} 
@@ -47,16 +54,19 @@ const Login = () => {
                         className="w-24 h-24 mx-auto object-contain mb-2"
                     />
                     <div>
-                        <h1 className="text-3xl font-black text-primary uppercase tracking-tighter italic">USAMA ACADEMY</h1>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em] mt-1 ml-1">Barashadu waa Furaha Guusha</p>
+                        <h1 className="text-3xl font-black text-primary tracking-tighter uppercase italic">
+                            USAMA <span className="text-secondary">ACADEMY</span>
+                        </h1>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em] mt-1">Gali Akoonkaaga Barashada</p>
                     </div>
                 </div>
 
                 {/* LOGIN CARD */}
-                <div className="glass-premium rounded-[3rem] p-8 sm:p-12 shadow-2xl border border-outline-variant space-y-8 relative overflow-hidden">
+                <div className="glass-premium rounded-[3.5rem] p-10 sm:p-12 shadow-2xl border border-outline-variant space-y-8 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-3xl pointer-events-none"></div>
-                    <div className="space-y-2">
-                        <h2 className="text-2xl font-black text-primary uppercase italic tracking-tighter">Ku soo dhawaaw!</h2>
+
+                    <div className="space-y-1">
+                        <h2 className="text-2xl font-black uppercase tracking-tight text-on-surface italic">Ku soo dhawoow</h2>
                         <p className="text-sm text-on-surface-variant font-medium opacity-80">Fadlan geli macluumaadkaaga si aad u bilowdo.</p>
                     </div>
 
@@ -93,7 +103,7 @@ const Login = () => {
                         <div className="space-y-2">
                             <div className="flex justify-between items-center px-4">
                                 <label className="text-[11px] font-black text-on-surface-variant uppercase tracking-[0.3em] opacity-40">Lambarka Sirta</label>
-                                <button type="button" className="text-[10px] font-black text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors">Ma ilowday?</button>
+                                <button type="button" onClick={() => alert('Fadlan la xariir maamulka Usama Academy si lambarka sirta dib loogu cusboonaysiiyo.')} className="text-[10px] font-black text-secondary uppercase tracking-[0.3em] hover:text-primary transition-colors">Ma ilowday?</button>
                             </div>
                             <div className="relative group">
                                 <Lock className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-on-surface-variant/50 group-focus-within:text-primary transition-colors" />
@@ -124,10 +134,40 @@ const Login = () => {
                         </button>
                     </form>
 
+                    {/* QUICK DEMO LOGINS */}
+                    <div className="pt-2 border-t border-outline-variant/50">
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant/70 text-center mb-3">
+                            Akoonada Tijaabada (Demo Login)
+                        </p>
+                        <div className="grid grid-cols-3 gap-2">
+                            <button
+                                type="button"
+                                onClick={() => handleQuickLogin('admin@usamacademy.com', 'Admin@2026')}
+                                className="py-2.5 px-2 bg-surface-container hover:bg-primary hover:text-white rounded-xl text-[10px] font-black uppercase tracking-wider text-on-surface transition-all border border-outline-variant"
+                            >
+                                👑 Admin
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleQuickLogin('instructor@eduflow.com', 'password123')}
+                                className="py-2.5 px-2 bg-surface-container hover:bg-secondary hover:text-white rounded-xl text-[10px] font-black uppercase tracking-wider text-on-surface transition-all border border-outline-variant"
+                            >
+                                👨‍🏫 Macalin
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleQuickLogin('student@eduflow.com', 'password123')}
+                                className="py-2.5 px-2 bg-surface-container hover:bg-emerald-600 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-wider text-on-surface transition-all border border-outline-variant"
+                            >
+                                🎓 Arday
+                            </button>
+                        </div>
+                    </div>
+
                     <div className="text-center pt-2 relative z-10">
                         <p className="text-[11px] font-black text-on-surface-variant uppercase tracking-[0.3em] opacity-80">
                             Ma haysatid akoon? 
-                            <Link to="/register" className="text-secondary ml-3 hover:text-primary transition-colors underline underline-offset-4 decoration-2">Abuur Identity</Link>
+                            <Link to="/register" className="text-secondary ml-3 hover:text-primary transition-colors underline underline-offset-4 decoration-2">Abuur Akoon Cusub</Link>
                         </p>
                     </div>
                 </div>

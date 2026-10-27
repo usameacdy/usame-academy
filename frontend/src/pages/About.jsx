@@ -17,9 +17,9 @@ const About = () => {
     const navigate = useNavigate();
 
     // Asset Paths (Generated)
-    const desktopHeroImg = "/about_hero_architecture_1776346633897.png";
-    const yaanNahayImg = "/student_group_meeting_1776346934254.png";
-    const mobileHeroImg = "/about_mobile_character_1776347404224.png";
+    const desktopHeroImg = `${import.meta.env.BASE_URL}about_hero_architecture_1776346633897.png`;
+    const yaanNahayImg = `${import.meta.env.BASE_URL}student_group_meeting_1776346934254.png`;
+    const mobileHeroImg = `${import.meta.env.BASE_URL}about_mobile_character_1776347404224.png`;
 
     return (
         <div className="min-h-screen bg-surface font-manrope">

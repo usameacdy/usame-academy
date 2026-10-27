@@ -37,5 +37,8 @@
     "postcss": "^8.4.49",
     "puppeteer": "^24.39.1",
     "vite": "^5.4.11"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.65.1"
   }
 }

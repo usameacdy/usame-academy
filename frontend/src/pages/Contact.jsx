@@ -27,7 +27,7 @@ const Contact = () => {
                             {/* The Portrait */}
                             <div className="aspect-[4/5] rounded-[3.5rem] overflow-hidden shadow-2xl border border-outline-variant group">
                                 <img 
-                                    src="/usama_profile_portrait_1777298562378.png" 
+                                    src={`${import.meta.env.BASE_URL}usama_profile_portrait_1777298562378.png`} 
                                     alt="Usama Academy Founder" 
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />

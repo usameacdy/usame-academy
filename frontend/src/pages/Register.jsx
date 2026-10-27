@@ -27,7 +27,7 @@ const Register = () => {
             await register(formData);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Khalad ayaa dhacay xilligii diiwaangelinta.');
+            setError(err.response?.data?.message || err.message || 'Khalad ayaa dhacay xilligii diiwaangelinta.');
         } finally {
             setLoading(false);
         }

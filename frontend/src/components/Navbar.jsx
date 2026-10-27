@@ -77,6 +77,11 @@ const Navbar = () => {
                     {user ? (
                         <>
                              <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-sm font-black uppercase tracking-widest text-on-surface">Dashboard</Link>
+                             {(user.role === 'admin' || user.role === 'instructor') && (
+                                 <Link to="/admin" onClick={() => setIsOpen(false)} className="text-sm font-black uppercase tracking-widest text-primary">
+                                     {user.role === 'admin' ? 'Maamulka' : 'Macalinka'}
+                                 </Link>
+                             )}
                              <button onClick={handleLogout} className="text-left text-sm font-black uppercase tracking-widest text-tertiary">Kabax</button>
                         </>
                     ) : (
