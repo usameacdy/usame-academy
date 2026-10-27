@@ -21,6 +21,7 @@ app.use(helmet({
     crossOriginResourcePolicy: false,
     contentSecurityPolicy: false 
 }));
+
 // Allow requests from frontend (dev, github pages, vercel, production)
 const allowedOrigins = [
     'http://localhost:3000',
@@ -45,7 +46,7 @@ app.use(express.json());
 // Rate Limiting
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5000, // Increased limit from 100 to 5000 to prevent locking out during active development
+    max: 5000, // Increased limit
 });
 app.use('/api', limiter);
 
@@ -56,6 +57,23 @@ app.use('/uploads', (req, res, next) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
     next();
 }, express.static(path.join(__dirname, 'uploads')));
+
+// Health Check Endpoints (keeps Render awake & allows monitoring)
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        message: 'EduFlow Backend is running!',
+        timestamp: new Date().toISOString()
+    });
+});
+
+app.get('/', (req, res) => {
+    res.status(200).json({ 
+        message: 'EduFlow API Server - Usama Academy',
+        version: '1.0.0',
+        status: 'online'
+    });
+});
 
 // Routes
 // Direct Admin Reset Password Route
