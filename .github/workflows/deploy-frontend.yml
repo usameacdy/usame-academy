@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: cd frontend && npm run build
         env:
-          VITE_API_URL: https://eduflow-backend-production-8b5f.up.railway.app/api
+          VITE_API_URL: https://eduflow-backend-37eh.onrender.com/api
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
