@@ -1,5 +1,10 @@
 const db = require('../config/db');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// Lazy-load Stripe so server starts even without STRIPE_SECRET_KEY
+const getStripe = () => {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error('Payment not configured. STRIPE_SECRET_KEY missing.');
+    return require('stripe')(key);
+};
 
 // @desc    Create Stripe Payment Intent
 // @route   POST /api/payments/stripe/create-intent
@@ -12,7 +17,7 @@ exports.createStripeIntent = async (req, res) => {
 
         const amountInCents = Math.round(course.rows[0].price * 100);
 
-        const paymentIntent = await stripe.paymentIntents.create({
+        const paymentIntent = await getStripe().paymentIntents.create({
             amount: amountInCents,
             currency: 'usd',
             metadata: { student_id: req.user.id, course_id },
