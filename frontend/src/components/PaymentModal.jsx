@@ -17,10 +17,10 @@ import {
 import api from '../api/axios';
 
 // Usama Academy Merchant / Reception Numbers
-const MERCHANT_EVC = '0614498157';     // Hormuud EVC Plus
+const MERCHANT_EVC = '0770877759';     // Hormuud EVC Plus
 const MERCHANT_ZAAD = '0634498157';    // Telesom Zaad
 const MERCHANT_SAHAL = '0906619970';   // Golis Sahal
-const MERCHANT_SOMTEL = '0654498157';  // Somtel e-Dahab
+const MERCHANT_SOMTEL = '0623498157';  // Somtel e-Dahab
 
 const PAYMENT_METHODS = [
     {
@@ -33,7 +33,7 @@ const PAYMENT_METHODS = [
         borderColor: 'border-rose-300',
         icon: '🔴',
         description: 'Hormuud Telecom (Koofur & Bartamaha)',
-        placeholder: '061XXXXXXX',
+        placeholder: '077XXXXXXX',
         merchant: MERCHANT_EVC,
         ussdPrefix: '*712*',
         getUssd: (amount) => `*712*${MERCHANT_EVC}*${amount}#`,
@@ -81,7 +81,7 @@ const PAYMENT_METHODS = [
         borderColor: 'border-orange-300',
         icon: '🟠',
         description: 'Somtel (Dhammaan Gobollada)',
-        placeholder: '065XXXXXXX',
+        placeholder: '062XXXXXXX',
         merchant: MERCHANT_SOMTEL,
         ussdPrefix: '*767*',
         getUssd: (amount) => `*767*${MERCHANT_SOMTEL}*${amount}#`,
