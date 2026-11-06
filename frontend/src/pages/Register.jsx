@@ -34,7 +34,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-surface font-manrope text-on-surface flex flex-col items-center justify-center p-6 sm:p-12 relative overflow-hidden selection:bg-secondary/30 selection:text-secondary">
+        <div className="min-h-screen bg-surface font-manrope text-on-surface flex flex-col items-center justify-center p-4 sm:p-12 relative overflow-hidden selection:bg-secondary/30 selection:text-secondary">
             
             {/* BACKGROUND DECOR */}
             <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl -ml-40 -mt-40" />
@@ -59,7 +59,7 @@ const Register = () => {
                 </div>
 
                 {/* REGISTER CARD */}
-                <div className="glass-premium rounded-[3.5rem] p-8 sm:p-12 shadow-2xl border border-outline-variant space-y-10 relative overflow-hidden">
+                <div className="glass-premium rounded-3xl sm:rounded-[3.5rem] p-6 sm:p-12 shadow-2xl border border-outline-variant space-y-8 sm:space-y-10 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-3xl pointer-events-none"></div>
                     <AnimatePresence>
                         {error && (
