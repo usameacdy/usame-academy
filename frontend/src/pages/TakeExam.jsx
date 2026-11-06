@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, HelpCircle, CheckCircle2, ChevronRight, AlertCircle } from 'lucide-react';
+import { Clock, HelpCircle, CheckCircle2, ChevronRight, AlertCircle, ArrowLeft } from 'lucide-react';
 
 const FALLBACK_EXAM = {
     id: 'exam-default',
@@ -248,6 +248,12 @@ const TakeExam = () => {
         <div className="max-w-5xl mx-auto py-12 md:py-20 px-6">
             <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-10 mb-16 px-4">
                 <div className="space-y-4 text-center md:text-left">
+                    <button
+                        onClick={() => navigate(`/courses/${courseId}`)}
+                        className="inline-flex items-center gap-2 text-xs font-black uppercase text-on-surface-variant hover:text-secondary px-3.5 py-1.5 rounded-xl bg-surface-container border border-outline-variant transition-all mb-1"
+                    >
+                        <ArrowLeft className="w-4 h-4" /> &larr; Ku Noqo Koorsada
+                    </button>
                     <div className="flex items-center gap-3 justify-center md:justify-start">
                         <span className="glass-pill text-[10px] py-1">FINAL EXAM</span>
                         <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />

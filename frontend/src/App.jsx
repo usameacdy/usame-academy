@@ -30,17 +30,12 @@ const LayoutWrapper = ({ children }) => {
   const isSpecialPage = location.pathname.includes('/lessons/') || 
                         location.pathname.includes('/exam');
 
-  const isFullWidthPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/privacy' || location.pathname === '/terms';
+  const isFullWidthPage = location.pathname === '/' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/privacy' || location.pathname === '/terms' || isSpecialPage;
   const isDashboardPage = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/lesson/') || location.pathname.startsWith('/exam/');
-
-
-  if (isSpecialPage) {
-    return <main className="min-h-screen">{children}</main>;
-  }
 
   return (
     <div className="flex flex-col min-h-screen">
-      {!isDashboardPage && <Navbar />}
+      <Navbar />
       {isFullWidthPage || isDashboardPage ? (
         <main className="flex-grow w-full">
           {children}
@@ -50,7 +45,7 @@ const LayoutWrapper = ({ children }) => {
           {children}
         </main>
       )}
-      {!isDashboardPage && <Footer />}
+      {!isSpecialPage && <Footer />}
     </div>
   );
 };

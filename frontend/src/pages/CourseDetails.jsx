@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
-import { Play, Lock, ChevronRight, Clock, Star, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Play, Lock, ChevronRight, Clock, Star, BookOpen, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import Loading from '../components/Loading';
@@ -128,8 +128,15 @@ const CourseDetails = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="space-y-8"
+                        className="space-y-6 sm:space-y-8"
                     >
+                        <button 
+                            onClick={() => navigate('/courses')} 
+                            className="inline-flex items-center gap-2 text-white/80 hover:text-white px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-black uppercase tracking-wider transition-all"
+                        >
+                            <ArrowLeft className="w-4 h-4" /> &larr; Ku Noqo Koorsooyinka
+                        </button>
+
                         <div className="flex gap-3">
                             <span className="bg-secondary/20 text-secondary border border-secondary/30 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
                                 {course.category || 'Professional Course'}

@@ -396,20 +396,28 @@ const LessonPlayer = () => {
             <div className="flex-1 flex flex-col min-w-0 bg-surface relative">
                 
                 {/* HEADER */}
-                <header className="bg-surface-container/60 backdrop-blur-3xl px-4 sm:px-8 py-3.5 sm:py-5 border-b border-outline-variant/30 flex justify-between items-center z-30 sticky top-0 shadow-sm">
-                    <div className="flex items-center gap-3 sm:gap-6">
+                <header className="bg-surface-container/60 backdrop-blur-3xl px-3 sm:px-8 py-3 sm:py-4 border-b border-outline-variant/30 flex justify-between items-center z-30 sticky top-0 shadow-sm">
+                    <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                        <button
+                            onClick={() => navigate(`/courses/${courseId}`)}
+                            className="p-2 sm:px-3 sm:py-2 bg-surface-container hover:bg-secondary hover:text-white rounded-xl transition-all text-on-surface border border-outline-variant text-xs font-black uppercase flex items-center gap-1 shrink-0"
+                            title="Ku noqo macluumaadka koorsada"
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                            <span className="hidden sm:inline">Koorsada</span>
+                        </button>
                         <button
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="w-10 h-10 sm:w-12 sm:h-12 bg-surface-container-high hover:bg-secondary hover:text-surface rounded-2xl transition-all text-secondary flex items-center justify-center shadow-lg border border-outline-variant group shrink-0"
+                            className="w-9 h-9 sm:w-11 sm:h-11 bg-surface-container-high hover:bg-secondary hover:text-surface rounded-xl transition-all text-secondary flex items-center justify-center shadow-md border border-outline-variant group shrink-0"
                             title="Bedel Curriculum-ka"
                         >
-                            <Menu className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                            <Menu className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
                         </button>
                         <div className="space-y-0.5 min-w-0">
                             <span className="text-[9px] sm:text-[10px] text-secondary font-black uppercase tracking-widest bg-secondary/10 px-2 sm:px-2.5 py-0.5 rounded-md border border-secondary/20 truncate inline-block">
                                 CASHARKA {currentIndex + 1}
                             </span>
-                            <h2 className="text-on-surface font-black text-sm sm:text-lg tracking-tight truncate max-w-[160px] sm:max-w-lg uppercase">{currentLesson.title}</h2>
+                            <h2 className="text-on-surface font-black text-xs sm:text-base tracking-tight truncate max-w-[140px] sm:max-w-md uppercase">{currentLesson.title}</h2>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 sm:gap-4">
